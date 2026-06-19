@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { createHashRouter, RouterProvider } from "react-router";
 import RootLayout from "./layout/RootLayout";
 import Home from "./pages/home/Home";
 import ShopBasket from "./pages/shop-basket/ShopBasket";
@@ -9,7 +9,7 @@ import Error from "./components/Error";
 import NotFound from "./components/NotFound";
 
 const App = () => {
-  const router = createBrowserRouter(
+  const router = createHashRouter(
     [
       {
         path: "/",
@@ -28,9 +28,6 @@ const App = () => {
         ],
       },
     ],
-    {
-      basename: import.meta.env.BASE_URL,
-    },
   );
 
   return <RouterProvider router={router} />;
