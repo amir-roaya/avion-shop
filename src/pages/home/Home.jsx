@@ -10,11 +10,11 @@ const ShowLatestProducts = () => {
   const latestProducts = products.slice(-4);
 
   if (latestProducts.length > 0) {
-    return latestProducts.map(({ id, mainHref, mainSrc, name, price }) => (
+    return latestProducts.map(({ id, mainSrc, name, price }) => (
       <div key={id} className="latest-product">
-        <a href={`${mainHref}/${id}`} className="latest-product__img">
+        <Link to={`/product-info/${id}`} className="latest-product__img">
           <img src={mainSrc} alt={name} />
-        </a>
+        </Link>
         <h4 className="latest-product__title">{name}</h4>
         <p className="latest-product__price">£{price}</p>
       </div>
@@ -36,7 +36,7 @@ const Home = () => {
       </div>
 
       <header className="header">
-        <Nav isSamePage={false} />
+        <Nav />
 
         <div className="header-content-mobile">
           <h2 className="header-content-mobile__title">
@@ -174,7 +174,10 @@ const Home = () => {
               </div>
 
               <div className="idea__img">
-                <img src={`${import.meta.env.BASE_URL}images/image-block.png`} alt="Image-Block" />
+                <img
+                  src={`${import.meta.env.BASE_URL}images/image-block.png`}
+                  alt="Image-Block"
+                />
               </div>
             </div>
           </div>

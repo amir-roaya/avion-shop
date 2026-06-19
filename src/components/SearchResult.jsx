@@ -1,6 +1,7 @@
+import { Link } from "react-router";
 import products from "../modules/product.js";
 
-const SearchResult = ({ userSearch, isSamePage }) => {
+const SearchResult = ({ userSearch }) => {
   const searchValue = userSearch.trim().toLowerCase();
 
   if (searchValue) {
@@ -9,14 +10,14 @@ const SearchResult = ({ userSearch, isSamePage }) => {
     );
 
     if (searchedProducts.length > 0) {
-      return searchedProducts.map(({ id, mainHref, name }) => (
+      return searchedProducts.map(({ id, name }) => (
         <li key={id} className="result-list__item">
-          <a
+          <Link
             className="result-list__link"
-            href={`${!isSamePage ? mainHref : "."}/${id}`}
+            to={`/product-info/${id}`}
           >
             {name}
-          </a>
+          </Link>
         </li>
       ));
     }

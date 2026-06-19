@@ -113,9 +113,9 @@ const ShowProductInfo = ({
 const ShowSameProducts = ({ sameProducts }) => {
   return sameProducts.map(({ id, mainSrc, name, price }) => (
     <div key={id} className="same-product">
-      <a href={`${id}`} className="same-product__img">
+      <Link to={`/product-info/${id}`} className="same-product__img">
         <img src={mainSrc} alt={name} />
-      </a>
+      </Link>
 
       <h4 className="same-product__title">{name}</h4>
       <p className="same-product__price">£{price}</p>
@@ -124,11 +124,21 @@ const ShowSameProducts = ({ sameProducts }) => {
 };
 
 const ProductInfo = () => {
-  const [mainProduct, setMainProduct] = useState(useLoaderData());
+  const loaderProduct = useLoaderData();
+
+  const [mainProduct, setMainProduct] = useState({});
   const [basket, setBasket] = useState([]);
   const [sameProducts, setSameProducts] = useState([]);
   const [isToastOpen, setIsToastOpen] = useState(false);
   const progressRef = useRef(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [mainProduct.id]);
+
+  useEffect(() => {
+    setMainProduct(loaderProduct);
+  }, [loaderProduct]);
 
   useEffect(() => {
     document.title = `${mainProduct.name}`;
@@ -186,7 +196,7 @@ const ProductInfo = () => {
   const addProductToBasket = useCallback(() => {
     setBasket((prevState) => {
       const mainProductIndex = prevState.findIndex(
-        (product) => product.id === mainProduct.id
+        (product) => product.id === mainProduct.id,
       );
 
       if (mainProductIndex === -1) {
@@ -195,7 +205,7 @@ const ProductInfo = () => {
         return prevState.map((product) =>
           product.id === mainProduct.id
             ? { ...product, quantity: product.quantity + mainProduct.quantity }
-            : product
+            : product,
         );
       }
     });
@@ -210,7 +220,7 @@ const ProductInfo = () => {
       </div>
 
       <header className="header">
-        <Nav isSamePage={true} />
+        <Nav />
 
         {mainProduct?.id ? (
           <ShowProductInfo

@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchResult from "./SearchResult";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { useDebounce } from "react-use";
 
-const Nav = ({ isSamePage }) => {
+const Nav = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [debouncedValue, setDebouncedValue] = useState("");
@@ -17,6 +17,12 @@ const Nav = ({ isSamePage }) => {
   ]);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const loacation = useLocation();
+  useEffect(() => {
+    setIsSearchOpen(false);
+    setSearchValue("");
+  }, [loacation.pathname]);
 
   return (
     <div className="nav">
@@ -49,10 +55,7 @@ const Nav = ({ isSamePage }) => {
             </div>
 
             <ul className="result-list">
-              <SearchResult
-                userSearch={debouncedValue}
-                isSamePage={isSamePage}
-              />
+              <SearchResult userSearch={debouncedValue} />
             </ul>
           </div>
         </div>
@@ -102,10 +105,7 @@ const Nav = ({ isSamePage }) => {
               </div>
 
               <ul className="mobile-result-list">
-                <SearchResult
-                  userSearch={debouncedMbSearchValue}
-                  isSamePage={isSamePage}
-                />
+                <SearchResult userSearch={debouncedMbSearchValue} />
               </ul>
             </div>
           </div>

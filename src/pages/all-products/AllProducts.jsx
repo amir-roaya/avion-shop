@@ -8,11 +8,11 @@ import Footer from "../../components/Footer";
 
 const ShowProducts = ({ filteredProducts }) => {
   if (filteredProducts.length) {
-    return filteredProducts.map(({ id, mainHref, mainSrc, name, price }) => (
+    return filteredProducts.map(({ id, mainSrc, name, price }) => (
       <div key={id} className="product">
-        <a href={`${mainHref}/${id}`} className="product__img">
+        <Link to={`/product-info/${id}`} className="product__img">
           <img src={mainSrc} alt={name} />
-        </a>
+        </Link>
 
         <h4 className="product__title">{name}</h4>
 
@@ -42,7 +42,7 @@ const AllProducts = () => {
 
     if (filters.type && filters.type !== "all products") {
       updatedProducts = updatedProducts.filter(
-        (product) => product.type.toLowerCase() === filters.type
+        (product) => product.type.toLowerCase() === filters.type,
       );
     }
 
@@ -81,7 +81,7 @@ const AllProducts = () => {
       </div>
 
       <header className="header">
-        <Nav isSamePage={false} />
+        <Nav />
 
         <div className="header__bottom"></div>
       </header>

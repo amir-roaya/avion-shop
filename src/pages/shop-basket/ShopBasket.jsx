@@ -53,7 +53,7 @@ const ShowTotalPrice = ({ basket }) => {
   const totalPrice = useMemo(() => {
     return basket.reduce(
       (sum, product) => sum + product.price * product.quantity,
-      0
+      0,
     );
   }, [basket]);
 
@@ -126,9 +126,9 @@ const ShopBasket = () => {
         .map((product) =>
           product.id === id && product.quantity > 0
             ? { ...product, quantity: product.quantity - 1 }
-            : product
+            : product,
         )
-        .filter((product) => product.quantity > 0)
+        .filter((product) => product.quantity > 0),
     );
   }, []);
 
@@ -137,15 +137,15 @@ const ShopBasket = () => {
       prevState.map((product) =>
         product.id === id
           ? { ...product, quantity: product.quantity + 1 }
-          : product
-      )
+          : product,
+      ),
     );
   }, []);
 
   return (
     <>
       <header className="header">
-        <Nav isSamePage={false} />
+        <Nav />
       </header>
 
       <main className="basket-main">
