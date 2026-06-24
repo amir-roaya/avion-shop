@@ -22,6 +22,9 @@ const Nav = () => {
   useEffect(() => {
     setIsSearchOpen(false);
     setSearchValue("");
+
+    setIsMbSearchOpen(false);
+    setMbSearchValue("");
   }, [loacation.pathname]);
 
   return (

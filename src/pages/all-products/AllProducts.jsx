@@ -25,6 +25,10 @@ const ShowProducts = ({ filteredProducts }) => {
 };
 
 const AllProducts = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
   const [filters, setFilters] = useState({
     type: "all products",
@@ -89,7 +93,7 @@ const AllProducts = () => {
       <main className="main">
         <div className="container">
           <div className="categories">
-            <button
+            <div
               className={`filters ${isFiltersOpen ? "filters--open" : ""}`}
               onClick={() => setIsFiltersOpen((prevState) => !prevState)}
             >
@@ -294,7 +298,7 @@ const AllProducts = () => {
                   </ul>
                 </div>
               </div>
-            </button>
+            </div>
 
             <select
               onChange={(e) =>

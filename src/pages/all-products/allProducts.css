@@ -309,6 +309,10 @@ option::checkmark {
         right: -20px;
     }
 
+    #sorting-select:hover, .filters:hover {
+        background-color: var(--light-gray)
+    }
+
     option {
         gap: 0;
     }
